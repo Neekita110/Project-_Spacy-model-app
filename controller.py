@@ -20,9 +20,13 @@ def load_config(config_path=None):
     return config
 
 def load_ner_model(model_path):
-    with open(model_path, 'rb') as model_file:
-        loaded_nlp = pickle.load(model_file)
-    return loaded_nlp
+    try:
+        with open(model_path, 'rb') as model_file:
+            loaded_nlp = pickle.load(model_file)
+        return loaded_nlp
+    except Exception as e:
+        print(f"Error loading NER model: {str(e)}")
+        return None
 
 def save_ner_model(ner_model, output_path):
     with open(output_path, 'wb') as model_file:
@@ -70,13 +74,20 @@ def load_training_data(file_path):
 
     return training_data, label_counts
 
+
 def train_ner_model_with_data(training_data, output_identifier, models_dir):
     nlp = spacy.blank("en")
-    for example in training_data:
-        nlp.update([example], drop=0.5, losses={})
+
+    # Increase the number of training iterations
+    for _ in range(20):  # You can adjust the number of iterations as needed
+        for example in training_data:
+            print(f"Training Example: {example}")
+            nlp.update([example], drop=0.5, losses={})
 
     output_path = os.path.join(models_dir, f'{output_identifier}.pickle')
     save_ner_model(nlp, output_path)
+    print(f"Model saved at: {output_path}")
+
 
 def train_ner_model_with_file(file_path, output_identifier, models_dir):
     training_data, label_counts = load_training_data(file_path)
