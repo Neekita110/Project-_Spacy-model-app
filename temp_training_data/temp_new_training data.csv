@@ -1,0 +1,6 @@
+text,entities
+"""ValueFirst is a great company""","[(""ValueFirst"", ""ORG"")]"
+"""Elon Musk founded SpaceX""","[(""Elon Musk"", ""PERSON""), (""SpaceX"", ""ORG"")]"
+"""Microsoft and IBM are competitors""","[(""Microsoft"", ""ORG""), (""IBM"", ""ORG"")]"
+"""Apple and Google are both big tech companies""","[(""Apple"", ""ORG""), (""Google"", ""ORG"")]"
+"""Apple is a great company""","[(""Apple"", ""ORG"")]"
