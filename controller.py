@@ -32,6 +32,7 @@ def save_ner_model(ner_model, output_path):
     with open(output_path, 'wb') as model_file:
         pickle.dump(ner_model, model_file)
 
+
 def check_label_examples(label_counts):
     for label, count in label_counts.items():
         if count < 5:
